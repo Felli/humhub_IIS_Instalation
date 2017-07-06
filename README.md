@@ -12,6 +12,21 @@ The idea of this repository is to:
   - On development install allow YII tool from every where
   
   
+  
+REQUIREMENTS
+------------
+Please note:
+ - This assumes public web folder is "public"
+ - It requires to have grunt and git installed
+
+How to use it
+--------------
+1) Download all
+2) Make sure is at same level as folder "public" which it is the web public access folder
+3) run the .bat file (and wait)
+
+
+  
   Know issues
   -----------
   - 1st version
