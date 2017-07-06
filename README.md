@@ -1,5 +1,5 @@
-# humhub_Windows_Grunt
-----------------------
+# Humhub IIS Instalation
+------------------------
 
 The idea of this repository is to:
 - Be able to download HumHub master
