@@ -16,4 +16,5 @@ The idea of this repository is to:
   -----------
   - 1st version
   - not enough testing
+  - Assumes web publicly access directory is “public” not “wwwroot”
 
