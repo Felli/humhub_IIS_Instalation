@@ -1,0 +1,1132 @@
+
+#########################################################################################
+  Git 
+#########################################################################################
+
+		git clone https://github.com/humhub/humhub.git
+		git clone https://github.com/humhub/humhub.git  new-folder-name
+		git clone https://github.com/humhub/humhub.git  public <------------- if exist fails!!!
+
+In case you want to dowload to existing folder: dl to another and move it
+
+Batch file command to dl and move it
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+cls
+@echo off
+
+
+SET path_relative=humhub-git
+
+
+if exist %path_relative% RD /S /Q %path_relative%
+
+git clone https://github.com/humhub/humhub.git %path_relative%
+
+REM move %path_relative% public
+
+
+PAUSE
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+NOTE: to upate installed repo*  (*STILL TESTING IT!)
+-----------------------------
+	cd humhub-git
+	or cd public
+	git pull origin master
+
+
+#########################################################################################
+  Composer
+#########################################################################################
+
+cd humhub-git
+or cd public
+composer global require "fxp/composer-asset-plugin:~1.1.1"
+composer update
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+cls
+@echo off
+
+
+SET path_relative=humhub-git
+
+
+if exist %path_relative% RD /S /Q %path_relative%
+
+git clone https://github.com/humhub/humhub.git %path_relative%
+
+REM move %path_relative% public
+
+cd %path_relative%
+
+composer global require "fxp/composer-asset-plugin:~1.1.1"
+
+composer update
+
+PAUSE
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+#########################################################################################
+  Grunt
+#########################################################################################
+
+
+https://github.com/humhub/humhub/blob/master/protected/humhub/docs/guide/developer/core-build.md
+
+Setup
+---------------------------------------------
+Install NPM
+Install Grunt (http://gruntjs.com/getting-started)
+
+
+Setup grunt dependencies
+---------------------------------------------
+Call the following commands in your humhub root directory:
+
+    npm update
+    npm install grunt --save-dev
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+cls
+@echo off
+
+
+SET path_relative=humhub-git
+
+
+if exist %path_relative% RD /S /Q %path_relative%
+
+git clone https://github.com/humhub/humhub.git %path_relative%
+
+REM move %path_relative% public
+
+cd %path_relative%
+
+composer global require "fxp/composer-asset-plugin:~1.1.1"
+
+composer update
+
+
+npm update
+
+npm install grunt --save-dev
+
+
+PAUSE
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+
+
+
+
+
+Grunt Asset Built
+---------------------------------------------------------------------------------------------------------------------------------
+The simples way to build your production assets is using the following grunt task:
+
+
+	grunt build-assets <------------- NOT WORKING user manual
+
+					Uses a shell command rm <=== DOES NOT EXIT ON WINDOWS
+
+TO FIX edit grunt file
+
+	Grunt.js
+
+---------------------------------------------------------------------------------------------------------------------------------
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        clean: ["assets/*"],
+        shell: {
+            buildAssets: {
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		command: "RD /s /q static\\assets & MD static\\assets & DEL /q static\\js\\all-*.* & DEL /q static\\ss\\all-*.* & icacls static\\assets /grant IUSR:(OI)(CI)(M)  & CD protected & C:\\PHP\\php-7.1.x-nts-Win32-VC14-x64\\php-win.exe yii asset humhub/config/assets.php humhub/config/assets-prod.php"
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+	
+	
+	replace linux commands by windows
+	replace ; by &
+	escape "\" by using "\\"
+	replace rm by md
+	etc
+
+	RMDIR C:\\_WEB_\\humhub.desarrollo.online\\public\\static\\assets /S /Q
+
+
+	rm static/js/all-*.js ;		del /q /s static\\js\\all-*.js & 
+	rm static/css/all-*.css ;	del /q static\\css\\all-*.css & 
+	rm -rf static/assets/* ;	rd /q /s static\\assets\\ & 
+	cd protected ; 
+	php yii asset humhub/config/assets.php humhub/config/assets-prod.php	C:\\PHP\\php-7.1.x-nts-Win32-VC14-x64\\php-win.exe yii asset humhub/config/assets.php humhub/config/assets-prod.php
+
+
+
+
+
+create a bacth file neame "grunt_shell.bat" 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+RD /s /q static\assets
+MD static\assets
+DEL /q static\js\all-*.js
+DEL /q static\ss\all-*.css
+icacls static\assets /grant IUSR:(OI)(CI)(M)
+CD protected
+C:\PHP\php-7.1.x-nts-Win32-VC14-x64\php-win.exe yii asset humhub/config/assets.php humhub/config/assets-prod.php
+
+
+
+
+or Manual Asset Built
+---------------------------------------------
+    Delete the content
+		
+		static/assets/*.*
+
+    Delete the old compressed file 
+    
+		static/js/all-*.js
+
+		static/css/all-*.css
+
+    Run: (php yii asset humhub/config/assets.php humhub/config/assets-prod.php)
+
+	CD /D "C:\_WEB_\humhub.desarrollo.online\public\protected"
+
+	"C:\PHP\php-7.1.x-nts-Win32-VC14-x64\php-win.exe" yii asset humhub/config/assets.php humhub/config/assets-prod.php
+
+	WAIT 30 segs until black grunt screen shows
+
+
+
+
+
+
+Build Community Theme
+---------------------------------------------
+
+	grunt build-theme
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+            buildTheme: {
+                command: function(name) {
+                    theme = name || grunt.option('name') || "HumHub";
+                    return "cd themes/"+theme+"/less ; lessc -x build.less ../css/theme.css";
+                }
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+            buildTheme: {
+                command: function(name) {
+                    theme = name || grunt.option('name') || "HumHub";
+                    return "cd themes\\"+theme+"\\less & lessc -x build.less ../css/theme.css";
+                }
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+-- NOTES ---------------------------------------------
+grunt build-assets
+grunt build-search
+
+
+
+
+
+/********************************************************************************************************************************
+
+  ███████ ████████ ██ ██      ██          ████████ ███████ ███████ ████████ ██ ███    ██  ██████       ██████  ███    ██     ██     ██ ██ ███    ██ ██████   ██████  ██     ██ ███████
+  ██         ██    ██ ██      ██             ██    ██      ██         ██    ██ ████   ██ ██           ██    ██ ████   ██     ██     ██ ██ ████   ██ ██   ██ ██    ██ ██     ██ ██
+  ███████    ██    ██ ██      ██             ██    █████   ███████    ██    ██ ██ ██  ██ ██   ███     ██    ██ ██ ██  ██     ██  █  ██ ██ ██ ██  ██ ██   ██ ██    ██ ██  █  ██ ███████
+       ██    ██    ██ ██      ██             ██    ██           ██    ██    ██ ██  ██ ██ ██    ██     ██    ██ ██  ██ ██     ██ ███ ██ ██ ██  ██ ██ ██   ██ ██    ██ ██ ███ ██      ██
+  ███████    ██    ██ ███████ ███████        ██    ███████ ███████    ██    ██ ██   ████  ██████       ██████  ██   ████      ███ ███  ██ ██   ████ ██████   ██████   ███ ███  ███████
+
+
+optionaly
+grunt less
+grunt concat
+grunt uglify
+grunt cssmin
+grunt watch
+grunt clean
+
+    
+
+grunt build-assets
+grunt build-search
+    
+    /**
+     * Build default HumHub theme:
+     * 
+     * > grunt build-theme
+     * 
+     * Build named theme:
+     * > grunt build-theme --name=MyTheme
+     * 
+     * or
+     * 
+     * > grunt shell:buildTheme:MyTheme
+     */
+    grunt.registerTask('build-theme', ['shell:buildTheme']);
+};
+
+********************************************************************************************************************************/
+
+
+#########################################################################################
+(OPTIONAL)  For production ONLY
+#########################################################################################
+
+  Edit
+	index.php
+---------------------------------------------------------------------------------------------------------------------------------
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+		// comment out the following two lines when deployed to production <---------------------------------------------------------------------------------------------
+		// defined('YII_DEBUG') or define('YII_DEBUG', true);
+		// defined('YII_ENV') or define('YII_ENV', 'dev');
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+Delete
+	index-test.php <---------------------------------------------------------------------------------------------
+
+
+
+#########################################################################################
+(OPTIONAL)  For production DEV
+#########################################################################################
+
+
+A) Enable Yii Debug Module
+#########################################################################################
+
+	.../protected/config/web.php
+
+---------------------------------------------------------------------------------------------------------------------------------
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+<?php
+
+/*
+return [
+];
+*/
+
+return [
+	'bootstrap' => ['debug'],
+	'modules' => [
+
+		'debug' => [
+			'class' => 'yii\debug\Module',
+			'allowedIPs' => ['127.0.0.1', '::1', '217.75.242.*'],//<-------------------------------------------------
+			// or
+			//'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.*', '*.*.*.*'],//<-------------------------------------------------
+		],
+
+	]
+];
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+B) Enable Gii Code Generator 
+#########################################################################################
+
+
+   Edit
+
+	.../protected/config/web.php
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+/*
+return [
+];
+*/
+
+return [
+	'bootstrap' => ['debug'],
+	'modules' => [
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		'gii' => [
+			'class' => 'yii\gii\Module',
+			'allowedIPs' => ['127.0.0.1', '::1', '217.75.242.*'],//<-------------------------------------------------
+			// or
+			//'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.*', '*.*.*.*'],//<-------------------------------------------------
+		],
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+	]
+];
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+
+#########################################################################################
+4) Url Rewriting
+#########################################################################################
+
+edit
+
+   protected/config/common.php
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	<?php
+	/*
+	return [
+	];
+	*/
+
+	return [
+		'components' => [
+		'urlManager' => [
+			'showScriptName' => false,
+			'enablePrettyUrl' => true,
+		],
+		]
+	];
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+
+
+
+#########################################################################################
+5)  move from humhub-git to public
+#########################################################################################
+
+
+#########################################################################################
+6)  Add crono jobs
+#########################################################################################
+
+
+Add to task schedule 2 scritps:
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+daily
+---------------------------------------------------------------------------------------------------------------------------------
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	cls
+	@ echo off
+
+	REM find current dir (current_dir)
+	REM --------------------------------------------------------
+	for %%* in (.) do set current_dir=%%~nx*
+
+
+	REM if current_dir = cronjobs => go 1 dire down
+	REM --------------------------------------------------------
+	if "%current_dir%" == "cronjobs" CD ..
+
+
+
+	REM get current path
+	REM --------------------------------------------------------
+	SET yii_path="%CD%\public\protected\"
+
+
+	REM echo.
+	REM echo.
+	REM echo yii_path = %yii_path%
+	REM echo.
+	REM echo current_dir = "%current_dir%"
+	REM echo.
+	REM echo ~dp0 = "%~dp0"
+	REM echo.
+	REM echo ~f0 =  "%~f0"
+	REM echo.
+	REM echo 0 =  %0
+	REM echo.
+	REM echo CD = "%CD%"
+	REM echo.
+	REM echo.
+	REM echo.
+	REM echo.
+
+	CD /D %yii_path%
+	"C:\PHP\php-7.1.x-nts-Win32-VC14-x64\php-win.exe" yii cron/daily
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+---------------------------------------------------------------------------------------------------------------------------------
+hourly 
+---------------------------------------------------------------------------------------------------------------------------------
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	cls
+	@ echo off
+
+	REM find current dir (current_dir)
+	REM --------------------------------------------------------
+	for %%* in (.) do set current_dir=%%~nx*
+
+
+	REM if current_dir = cronjobs => go 1 dire down
+	REM --------------------------------------------------------
+	if "%current_dir%" == "cronjobs" CD ..
+
+
+
+	REM get current path
+	REM --------------------------------------------------------
+	SET yii_path="%CD%\public\protected\"
+
+
+	REM echo.
+	REM echo.
+	REM echo yii_path = %yii_path%
+	REM echo.
+	REM echo current_dir = "%current_dir%"
+	REM echo.
+	REM echo ~dp0 = "%~dp0"
+	REM echo.
+	REM echo ~f0 =  "%~f0"
+	REM echo.
+	REM echo 0 =  %0
+	REM echo.
+	REM echo CD = "%CD%"
+	REM echo.
+	REM echo.
+	REM echo.
+	REM echo.
+
+
+	CD /D %yii_path%
+	"C:\PHP\php-7.1.x-nts-Win32-VC14-x64\php-win.exe" yii cron/hourly
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+Can import tas as follow:
+HOURLY - humhub.desarrollo.com .xml
+---------------------------------------------------------------------------------------------------------------------------------
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.4" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Date>2017-03-05T02:38:26.5952274</Date>
+    <Author>IOXOI-V-DEV-01\Administrator</Author>
+    <Description>C:\_webs_\humhub.desarrollo.com\cronjobs</Description>
+    <URI>\HOURLY - humhub.desarrollo.com</URI>
+  </RegistrationInfo>
+  <Triggers>
+    <CalendarTrigger>
+      <Repetition>
+        <Interval>PT1H</Interval>
+        <Duration>P1D</Duration>
+        <StopAtDurationEnd>false</StopAtDurationEnd>
+      </Repetition>
+      <StartBoundary>2017-03-05T02:37:57</StartBoundary>
+      <ExecutionTimeLimit>PT30M</ExecutionTimeLimit>
+      <Enabled>true</Enabled>
+      <ScheduleByDay>
+        <DaysInterval>1</DaysInterval>
+      </ScheduleByDay>
+    </CalendarTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <UserId>S-1-5-21-2293515902-2927378631-734181477-500</UserId>
+      <LogonType>Password</LogonType>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>true</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>true</StopIfGoingOnBatteries>
+    <AllowHardTerminate>true</AllowHardTerminate>
+    <StartWhenAvailable>false</StartWhenAvailable>
+    <RunOnlyIfNetworkAvailable>false</RunOnlyIfNetworkAvailable>
+    <IdleSettings>
+      <StopOnIdleEnd>true</StopOnIdleEnd>
+      <RestartOnIdle>false</RestartOnIdle>
+    </IdleSettings>
+    <AllowStartOnDemand>true</AllowStartOnDemand>
+    <Enabled>true</Enabled>
+    <Hidden>true</Hidden>
+    <RunOnlyIfIdle>false</RunOnlyIfIdle>
+    <DisallowStartOnRemoteAppSession>false</DisallowStartOnRemoteAppSession>
+    <UseUnifiedSchedulingEngine>true</UseUnifiedSchedulingEngine>
+    <WakeToRun>false</WakeToRun>
+    <ExecutionTimeLimit>PT72H</ExecutionTimeLimit>
+    <Priority>7</Priority>
+  </Settings>
+  <Actions Context="Author">
+    <Exec>
+      <Command>C:\_webs_\humhub.desarrollo.com\cronjobs\CRON_jobs_hourly_.bat</Command>
+      <WorkingDirectory>C:\_webs_\humhub.desarrollo.com\cronjobs\</WorkingDirectory>
+    </Exec>
+  </Actions>
+</Task>
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+#########################################################################################
+7)  add Write permissions
+#########################################################################################
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+cls
+@ECHO OFF
+
+REM find current dir (current_dir)
+REM --------------------------------------------------------
+for %%* in (.) do set current_dir=%%~nx*
+
+
+SET base_path=%current_dir%\public\
+
+echo base_path = %base_path%
+
+
+rem SET pool_name=humhub.en-desarrollo.es
+
+icacls "%base_path%assets"		/grant IUSR:(OI)(CI)(M)
+icacls "%base_path%protected\config"	/grant IUSR:(OI)(CI)(M)
+icacls "%base_path%protected\modules"	/grant IUSR:(OI)(CI)(M)
+icacls "%base_path%protected\runtime"	/grant IUSR:(OI)(CI)(M)
+icacls "%base_path%uploads"		/grant IUSR:(OI)(CI)(M)
+
+REM icacls "%base_path%\assets\*"			/T /grant "IIS AppPool\%pool_name%":(OI)(CI)(M)
+REM icacls "%base_path%\protected\config\*"		/T /grant "IIS AppPool\%pool_name%":(OI)(CI)(M)
+REM icacls "%base_path%\protected\modules\*"	/T /grant "IIS AppPool\%pool_name%":(OI)(CI)(M)
+REM icacls "%base_path%\protected\runtime\*"	/T /grant "IIS AppPool\%pool_name%":(OI)(CI)(M)
+REM icacls "%base_path%\uploads\*"			/T /grant "IIS AppPool\%pool_name%":(OI)(CI)(M)
+
+
+icacls "%base_path%assets\yii"		/grant IUSR:(OI)(CI)(X)
+icacls "%base_path%assets\yii.bat"	/grant IUSR:(OI)(CI)(X)
+
+REM icacls "%base_path%\assets\yii"			/T /grant "IIS AppPool\%pool_name%":(OI)(CI)(M)(X)
+REM icacls "%base_path%\assets\yii.bat"		/T /grant "IIS AppPool\%pool_name%":(OI)(CI)(M)(X)
+
+REM icacls c:\inetpub\wwwroot /grant "IIS APPPOOL\DefaultAppPool":(OI)(CI)(RX)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+#########################################################################################
+8) web.config
+#########################################################################################
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		<rule name="block files and folderd starting with . " patternSyntax="ECMAScript" stopProcessing="true">
+			<match url="(^\.|\/\.)" ignoreCase="true" negate="false" />
+			<conditions logicalGrouping="MatchAll">
+			</conditions>
+			<action type="Redirect" url="404.php" />
+			<!-- <action type="AbortRequest" /> -->
+			<!-- <action type="CustomResponse" statusCode="403" statusReason="Forbidden" statusDescription="Forbidden" /> -->
+		</rule>
+
+		<rule name="block dev files bak|bat|config|sql|fla|md|psd|ini|log|sh|inc|swp|dist|composer.json|composer.lock" patternSyntax="ECMAScript" stopProcessing="true">
+			<match url="(\.(bak|bat|config|sql|fla|md|psd|ini|log|sh|inc|swp|dist)|~|init|composer\.json|composer\.lock)$" ignoreCase="true" negate="false" />
+			<conditions logicalGrouping="MatchAll">
+			</conditions>
+			<action type="Redirect" url="404.php" />
+			<!-- <action type="AbortRequest" /> -->
+			<!-- <action type="CustomResponse" statusCode="403" statusReason="Forbidden" statusDescription="Forbidden" /> -->
+		</rule>
+
+		<rule name="block files and folderd specific" patternSyntax="ECMAScript" stopProcessing="true">
+			<match url="(^protected\/|^yii|^uploads\/file\/)" ignoreCase="false" />
+			<action type="Redirect" url="404.php" />
+			<!-- <action type="AbortRequest" /> -->
+			<!-- <action type="CustomResponse" statusCode="403" statusReason="Forbidden" statusDescription="Forbidden" /> -->
+		</rule>
+
+                <rule name="Yii2 enablePrettyUrl" stopProcessing="true">
+			<match url="^(.*)$" ignoreCase="false" />
+			<conditions>
+				<add input="{REQUEST_FILENAME}" matchType="IsFile" ignoreCase="false" negate="true" />
+				<add input="{REQUEST_FILENAME}" matchType="IsDirectory" ignoreCase="false" negate="true" />
+			</conditions>
+			<action type="Rewrite" url="index.php" />
+                </rule>
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+#########################################################################################
+10) MySQL 
+#########################################################################################
+
+Check server default
+
+timezone
+========================================================================================
+
+
+Check current TIME timezone
+
+	
+	SELECT @@global.time_zone;
+	
+		SYSTEM = OK
+
+	SELECT @@session.time_zone;
+
+		SYSTEM = OK
+
+/***********************************************************************************************************************************
+*
+* **** DO NOT USE *****************************************************************
+*
+*	//SELECT TIMEDIFF(NOW(), UTC_TIMESTAMP);
+*	//SELECT name FROM mysql.time_zone_name;	Check current name timezone
+*
+*
+*		On Windows, the my.cnf file may be called my.ini
+*
+*			
+*			my.ini
+*			
+*			%PROGRAMDATA%\MySQL\MySQL Server 5.7\my.ini		
+*			
+*			C:\ProgramData\MySQL\MySQL Server 5.7\my.ini
+*
+*			NOT default-time-zone should be defined		if you want add default-time-zone='+01:00'  (madrid)
+*
+*
+*
+*	https://stackoverflow.com/questions/930900/how-do-i-set-the-time-zone-of-mysql
+*
+*
+***********************************************************************************************************************************/
+
+
+
+collation
+========================================================================================
+
+2 checks:
+
+	SHOW VARIABLES LIKE  'char%';
+
+		utf8 = ok
+
+	On Windows, the my.cnf file may be called my.ini
+	
+		my.ini
+
+		%PROGRAMDATA%\MySQL\MySQL Server 5.7\my.ini		
+		
+		C:\ProgramData\MySQL\MySQL Server 5.7\my.ini
+
+	Look for
+	
+		character-set-server=utf8
+
+/***********************************************************************************************************************************
+*
+* **** DO NOT USE *****************************************************************
+*
+*
+*	change database collation:
+*
+*	ALTER DATABASE <database_name> CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+*
+*	change table collation:
+*
+*	ALTER TABLE <table_name> CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+*
+*	change column collation:
+*
+*	ALTER TABLE <table_name> MODIFY <column_name> VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+*
+*	More info:
+*
+*
+*
+*
+*	https://stackoverflow.com/questions/5906585/how-to-change-the-default-collation-of-a-database
+*
+*
+***********************************************************************************************************************************/
+
+
+
+
+CREATE DATABASE
+========================================================================================
+
+CREATE DATABASE db_humhub CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+Create new user in MySQL and give it full access to one database
+========================================================================================
+GRANT ALL PRIVILEGES ON db_humhub.* To 'user_humhub'@'localhost' IDENTIFIED BY 'password';
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+CREATE DATABASE db_humhub CHARACTER SET utf8 COLLATE utf8_general_ci;
+GRANT ALL PRIVILEGES ON db_humhub.* To 'user_humhub'@'localhost' IDENTIFIED BY 'password';
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#########################################################################################
+Statistics/Tracking
+#########################################################################################
+Your tracking code can be managed under Administration -> Settings -> Advanced -> Statistics.
+
+In order to send the tracking code in case of pjax page loads as well as full page loads, you have to add the following to your statistics code by the example of google analytics:
+
+$(document).on('pjax:end', function() {
+    ga('set', 'location', window.location.href);
+    ga('send', 'pageview');
+});
+
+or by using the old ga version:
+
+$(document).on('pjax:end', function() {
+    if( window._gaq ) {
+        _gaq.push(['_trackPageview', window.location.href]);
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+###################################################################################################################################
+#                                                                                                                                 #
+#                                                                                                                                 #
+#	 ██████   ██████      ███    ██  ██████  ████████     ██    ██ ███████ ███████                                            #
+#	 ██   ██ ██    ██     ████   ██ ██    ██    ██        ██    ██ ██      ██                                                 #
+#	 ██   ██ ██    ██     ██ ██  ██ ██    ██    ██        ██    ██ ███████ █████                                              #
+#	 ██   ██ ██    ██     ██  ██ ██ ██    ██    ██        ██    ██      ██ ██                                                 #
+#	 ██████   ██████      ██   ████  ██████     ██         ██████  ███████ ███████                                            #
+#                                                                                                                                 #
+#                                                                                                                                 #
+#                                                                                                                                 #
+#	 ██████  ███████ ██       ██████  ██     ██     ████████ ██   ██ ██ ███████     ████████ ██ ████████ ██      ███████      #
+#	 ██   ██ ██      ██      ██    ██ ██     ██        ██    ██   ██ ██ ██             ██    ██    ██    ██      ██           #
+#	 ██████  █████   ██      ██    ██ ██  █  ██        ██    ███████ ██ ███████        ██    ██    ██    ██      █████        #
+#	 ██   ██ ██      ██      ██    ██ ██ ███ ██        ██    ██   ██ ██      ██        ██    ██    ██    ██      ██		  #
+#	 ██████  ███████ ███████  ██████   ███ ███         ██    ██   ██ ██ ███████        ██    ██    ██    ███████ ███████      #
+#                                                                                                                                 #
+#                                                                                                                                 #
+#                                                                                                                                 #
+###################################################################################################################################
+
+
+
+	################################################################################################################
+	#                                                                                                              #
+	#                                                                                                              #
+	#	 ██     ██  ██████  ██████  ██   ██ ██ ███    ██  ██████       ██████  ███    ██     ██ ████████       #
+	#	 ██     ██ ██    ██ ██   ██ ██  ██  ██ ████   ██ ██           ██    ██ ████   ██     ██    ██          #
+	#	 ██  █  ██ ██    ██ ██████  █████   ██ ██ ██  ██ ██   ███     ██    ██ ██ ██  ██     ██    ██          #
+	#	 ██ ███ ██ ██    ██ ██   ██ ██  ██  ██ ██  ██ ██ ██    ██     ██    ██ ██  ██ ██     ██    ██          #
+	#	  ███ ███   ██████  ██   ██ ██   ██ ██ ██   ████  ██████       ██████  ██   ████     ██    ██          #
+	#                                                                                                              #
+	#                                                                                                              #
+	################################################################################################################
+
+
+
+
+#########################################################################################
+oAuthn for google facebook live
+#########################################################################################
+
+/protected/config/common.php
+
+<?php
+
+return [
+    'components' => [
+    // ...
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        'authClientCollection' => [
+            'clients' => [
+                // ...
+                'facebook' => [
+                    'class' => 'humhub\modules\user\authclient\Facebook',
+                    'clientId' => 'YOUR_ID',
+                    'clientSecret' => 'YOUR_SECRET',
+               ],
+              
+               'github' => [
+                    'class' => 'humhub\modules\user\authclient\GitHub',
+                    'clientId' => 'YOUR_ID',
+                    'clientSecret' => ' YOUR_SECRET',
+                    // require read access to the users email
+                    // https://developer.github.com/v3/oauth/#scopes
+                    'scope' => 'user:email',
+               ],
+               'google' => [
+                    'class' => 'humhub\modules\user\authclient\Google',
+                    'clientId' => 'YOUR_ID',
+                    'clientSecret' => 'YOUR_SECRET',
+               ],
+               'live' => [
+                    'class' => 'humhub\modules\user\authclient\Live',
+                    'clientId' => 'YOUR_ID',
+                    'clientSecret' => 'YOUR_SECRET',
+                ],
+              ],
+             ],
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       //...
+        'urlManager' => [
+            'showScriptName' => false,
+            'enablePrettyUrl' => true,
+        ],
+    ]
+];
+
+
+
+#########################################################################################
+Change Homepage
+#########################################################################################
+
+
+
+You can change the homepage in the configuration file: 
+
+
+
+	protected/config/web.php
+
+
+
+Example: change to space
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<?php
+
+return [
+   'homeUrl' => ['/space/space', 'sguid' => '55bddcda-fcbf-4238-8ac7-4300b3cee91b'],
+];
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Example: Directory
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<?php
+
+return [
+   'homeUrl' => ['/directory/directory'],
+];
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+
+#########################################################################################
+Disable marketplace SSL Validation
+#########################################################################################
+
+
+
+If you get some error like
+
+> Could not fetch module list online! (Error in cURL request: SSL peer certificate or SSH remote key was not OK)
+
+    Edit
+    
+	/protected/config/local/_settings.php
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      'modules' =>
+      array(
+          'admin' => array(
+              'marketplaceApiValidateSsl' => false
+          ),
+      ),
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+
+
+#########################################################################################
+ADD  Image Magick 
+#########################################################################################
+
+
+1 Download ImageMagick
+----------------------
+
+https://imagemagick.org/script/binary-releases.php#windows
+
+
+2 Install Windows app 
+----------------------
+
+    Install at:
+
+	C:\PHP\ImageMagick
+
+
+	Do not forget ----->  Add application folder to system path
+
+
+2 Install Windows app 
+----------------------
+
+Download
+
+	latest dll (windows) 
+
+	USE Non Thread Safe (NTS) x86
+
+	https://pecl.php.net/package/imagick
+
+
+Add to php.ini
+
+	[Imagick]
+	extension=php_imagick.dll
+
+
+3 Restart
+----------------------
+
+Check PHPInfo
+
+
+
+4 Setup at humhub
+----------------------
+
+Administration -> Settings -> Advanced -> Files 
+
+	entering the location of the convert command (e.g. /usr/bin/convert). 
+
+	C:\PHP\ImageMagick\Convert.exe
+
+
+
+NOTES
+----------------------
+https://stackoverflow.com/questions/18375092/imagick-php-windows/36378764#36378764
+https://secure.php.net/manual/en/imagick.setup.php
+
+Open the command prompt (Run->”CMD”->ENTER) and type in convert and press enter. You should see the help parameters of convert. If so go to step 4.
+
+
+
+
+
+https://www.elxsy.com/2009/07/installing-imagemagick-on-windows-and-using-with-php-imagick/
+http://docs.humhub.org/admin-performance.html
+
+
+
+
+
+#########################################################################################
+ADD  X-Sendfile 
+#########################################################################################
+
+
+https://github.com/stakach/IIS-X-Sendfile-plugin
+
+
+
+
+
+Administration -> Settings -> Files -> Enable X-Sendfile Support.
+
+
+
+
+
+#########################################################################################
+WinCache
+#########################################################################################
+
+yii\caching\WinCache: uses PHP WinCache (see also) extension.
+To use this application component, the WinCache PHP extension must be loaded. 
+
+
+Also note that "wincache.ucenabled" should be set to "On" in your php.ini file.
+
+
+
+   protected/config/common.php
+
+	<?php
+	/*
+	return [
+	];
+	*/
+
+	return [
+		'components' => [
+
+		//......
+
+		'cache' => [
+			'class' => 'yii\caching\WinCache',
+		],
+
+		//......
+
+
+
+		],
+
+	];
+
+
+Caching
+
+Administration -> Settings -> Advanced -> Caching.
+
+NOTE: In addition to those listed caching systems, you can use any Yii2 compatible caching driver.  (https://github.com/humhub/humhub/blob/master/protected/humhub/docs/guide/admin/performance.md)
+
+
+
+CODE HAS NO SUPPORT FOR IT!!! <----------------------------------------------------------------------------
+
+
+
+
+
+#########################################################################################
+Online modules
+#########################################################################################
+
+	\public\protected\humhub\modules\admin\views\module\listOnline.php
+
