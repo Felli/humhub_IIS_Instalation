@@ -25,7 +25,7 @@ How to use it
 2) Make sure is at same level as folder "public" which it is the web public access folder
 3) run the .bat file (and wait)
 
-###On the file __HOW_TO_INSTALL__.txt we try to explain what we have done in case you whant to modify 
+### On the file __HOW_TO_INSTALL__.txt we try to explain what we have done in case you whant to modify 
 
   
   Know issues
@@ -33,6 +33,8 @@ How to use it
   - 1st version
   - not enough testing
   - Assumes web publicly access directory is “public” not “wwwroot”
+
+
 
 
 # ANY HELP, COMMENT, QUESTION, JOKE OR ISSUE is more than welcome!!!
